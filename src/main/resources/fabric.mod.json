@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "randommod",
+  "version": "${version}",
+  "name": "RandomMod",
+  "description": "Server-side moderation GUI for Fabric servers.",
+  "authors": [
+    "RandomMod Contributors"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "environment": "server",
+  "entrypoints": {
+    "server": [
+      "com.random.randommod.RandomMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "minecraft": "26.1.2",
+    "fabric-api": ">=0.153.0+26.1.2",
+    "sgui": ">=2.0.0+26.1",
+    "java": ">=25"
+  }
+}
