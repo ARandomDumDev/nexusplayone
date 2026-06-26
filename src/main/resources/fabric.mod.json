@@ -4,11 +4,17 @@
   "version": "${version}",
   "name": "RandomMod",
   "description": "Server-side moderation GUI for Fabric servers.",
-  "authors": ["RandomMod Contributors"],
+  "authors": [
+    "RandomMod Contributors"
+  ],
   "contact": {},
   "license": "MIT",
   "environment": "server",
-  "entrypoints": { "server": ["com.random.randommod.RandomMod"] },
+  "entrypoints": {
+    "server": [
+      "com.random.randommod.RandomMod"
+    ]
+  },
   "depends": {
     "fabricloader": ">=0.18.4",
     "minecraft": "26.1.2",
