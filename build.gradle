@@ -1,4 +1,4 @@
-plugins {
+ plugins {
     id 'net.fabricmc.fabric-loom' version "${loom_version}"
     id 'maven-publish'
 }
@@ -13,6 +13,24 @@ base {
 loom {
     officialMojangMappings()
 }
+buildscript {
+    repositories { maven { url = 'https://maven.fabricmc.net/' }; mavenCentral(); gradlePluginPortal() }
+    dependencies { classpath "net.fabricmc:fabric-loom:${project.loom_version}" }
+}
+
+apply plugin: 'fabric-loom'
+apply plugin: 'maven-publish'
+
+version = project.mod_version
+group = project.maven_group
+base { archivesName = project.archives_base_name }
+
+repositories {
+    maven { url = 'https://maven.nucleoid.xyz' }
+    mavenCentral()
+}
+
+loom { officialMojangMappings() }
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -20,22 +38,19 @@ dependencies {
     implementation "net.fabricmc:fabric-loader:${project.loader_version}"
     implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     implementation include("eu.pb4:sgui:${project.sgui_version}")
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modImplementation include("eu.pb4:sgui:${project.sgui_version}")
 }
 
 processResources {
     inputs.property 'version', project.version
-    filesMatching('fabric.mod.json') {
-        expand 'version': inputs.properties.version
-    }
+    filesMatching('fabric.mod.json') { expand 'version': inputs.properties.version }
 }
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(25)
-    }
+    toolchain { languageVersion = JavaLanguageVersion.of(21) }
     withSourcesJar()
 }
 
-tasks.withType(JavaCompile).configureEach {
-    options.release = 25
-}
+tasks.withType(JavaCompile).configureEach { options.release = 21 }
